@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Сортировка.JS — Образовательная Платформа
 
-## Getting Started
+Интерактивный учебный веб-сервис по основам работы с массивами, функциям сравнения (компараторам), классическим алгоритмам сортировки и лучшим практикам применения сортировок в промышленной JavaScript-разработке.
 
-First, run the development server:
+Все материалы, уроки, тесты и подсказки к задачам полностью написаны на **русском языке**. Тесты и структуры проекта описаны на **английском** для максимального соответствия реальной практике коммерческой разработки.
 
+---
+
+## Технический стек
+- **Next.js 16** (App Router, React 19)
+- **TypeScript**
+- **Tailwind CSS v4** (для стилизации премиум-интерфейса)
+- **Lucide Icons**
+- **Vitest** (быстрый фреймворк для юнит-тестов)
+
+---
+
+## Структура проекта
+- `src/app/` — Страницы платформы (Главная, каталог тем, карта обучения, практика, интервью).
+- `src/components/` — Переиспользуемые UI-компоненты (CodeBlock, LessonQuiz, ProgressBar).
+- `src/data/` — База данных уроков (`curriculum.ts`) и практических задач (`tasks.ts`).
+- `src/lib/` — Модули (хранилище состояния `storage.ts` со сбросом на in-memory кэш).
+- `tasks/` — Локальные файлы задач и автотесты для выполнения учеником.
+  - `/arrays/` — Основы итерации и встроенные методы.
+  - `/sort/` — Метод `Array.prototype.sort`, кастомные компараторы, иммутабельная сортировка.
+  - `/algorithms/` — Пузырьковая, выбором, вставками, быстрая, слиянием и пирамидальная сортировки.
+
+---
+
+## Команды для запуска
+
+### 1. Установка зависимостей
+Установите все необходимые пакеты и зависимости:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Запуск веб-платформы в режиме разработчика
+Запустите локальный сервер разработки:
+```bash
+npm run dev
+```
+После запуска откройте в браузере: [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Запуск тестов
+Для проверки вашего решения в любой из задач выполните команду тестирования:
+```bash
+# Запуск всех тестов в проекте
+npm run test
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Запуск тестов для конкретной задачи (пример)
+npx vitest tasks/sort/sort-numbers/solution.test.ts
+```
 
-## Learn More
+### 4. Проверка линтинга
+Проверка соответствия стилю кодирования:
+```bash
+npm run lint
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 5. Сборка проекта
+Сборка production-версии приложения:
+```bash
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Процесс выполнения практических задач
+1. Перейдите на вкладку **Практика** на веб-интерфейсе или выберите задачу внутри конкретного урока.
+2. Прочитайте условие задачи, ограничения, входные/выходные данные и подсказки.
+3. Откройте соответствующий файл шаблона в папке `tasks/` (путь указан в карточке задачи, например, `tasks/sort/sort-numbers/solution.ts`).
+4. Напишите код вашей функции в файле `solution.ts`.
+5. Запустите тесты для этой задачи с помощью команды `npx vitest <путь_к_тесту>`.
+6. После того как тесты успешно пройдут (вы увидите зеленые индикаторы в терминале), отметьте задачу решенной на веб-интерфейсе платформы для сохранения вашего прогресса!
