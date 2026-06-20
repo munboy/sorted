@@ -72,3 +72,9 @@
 .dark ::-webkit-scrollbar-thumb:hover {
   background: #475569;
 }
+
+/* highlight.js theme overrides for premium dark theme consistency */
+.hljs {
+  background: transparent !important;
+  padding: 0 !important;
+}

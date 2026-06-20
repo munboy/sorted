@@ -1,7 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Check, Copy } from 'lucide-react';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/vs2015.css';
 
 interface CodeBlockProps {
   code: string;
@@ -21,6 +23,15 @@ export default function CodeBlock({ code, language = 'javascript', title }: Code
       console.error('Failed to copy text', err);
     }
   };
+
+  const highlightedCode = useMemo(() => {
+    try {
+      const lang = language.toLowerCase() === 'ts' ? 'typescript' : language.toLowerCase() === 'js' ? 'javascript' : language.toLowerCase();
+      return hljs.highlight(code, { language: lang }).value;
+    } catch (err) {
+      return code;
+    }
+  }, [code, language]);
 
   return (
     <div className="my-6 overflow-hidden rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-900 text-slate-100 font-mono text-sm leading-relaxed shadow-sm">
@@ -49,7 +60,10 @@ export default function CodeBlock({ code, language = 'javascript', title }: Code
       {/* Code Area */}
       <div className="p-4 overflow-x-auto">
         <pre className="whitespace-pre">
-          <code>{code}</code>
+          <code 
+            className={`hljs language-${language}`}
+            dangerouslySetInnerHTML={{ __html: highlightedCode }}
+          />
         </pre>
       </div>
     </div>
